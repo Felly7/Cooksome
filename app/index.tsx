@@ -1,52 +1,63 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
-//import firebase from '../firebase';
+// screens/LoginScreen.js
 import { router } from 'expo-router';
-import { useFonts } from 'expo-font';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity,Image } from 'react-native';
+import * as Font from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
+
+const loadFonts = () => {
+  return Font.loadAsync({
+    'TiltPrism-Regular': require('../assets/fonts/TiltPrism-Regular.ttf'),
+  });
+};
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // firebase.auth().signInWithEmailAndPassword(email, password)
-    //   .then(() => {
-    //     console.log('User signed in!');
-    //     navigation.navigate('Home');
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
-    console.log("its working")
-    router.push("(tabs)")
-  };
+  const handlelogin =()=>{
+    router.push('(tabs)')
+  }
 
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+  useEffect(() => {
+    loadFonts().then(() => setFontsLoaded(true));
+  }, []);
+
+  // if (!fontsLoaded) {
+  //   return <AppLoading />;
+  // }
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../assets/images/logo.jpg")}
-        style={styles.logo}
-      />
-      <Text style={styles.welcome}>Cooksome</Text>
+      <Image style={styles.logoImage} source= {require('../assets/images/logo.jpg')}/>
+      <Text style={styles.logoText}>CookSome</Text>
+      <Text style={styles.title}>Chef up your own dish with Cooksome</Text>
       <TextInput
+        style={styles.input}
         placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.input}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        autoCorrect={false}
       />
       <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
         style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+        autoCapitalize="none"
+        autoCorrect={false}
       />
-
-      <TouchableOpacity onPress={handleLogin} style={styles.button}>
-        <Text style={styles.buttonText}>Login</Text>
+      <TouchableOpacity style={styles.button} onPress={handlelogin}>
+        <Text style={styles.buttonText}>Explore the app</Text>
       </TouchableOpacity>
-
-      <Text style={{color: 'blue', marginTop: 30, fontSize: 15}} onPress={() => router.push('/register')}> Register</Text>
+      <TouchableOpacity>
+        <Text style={styles.forgotText}>Forgot password?</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text style={styles.registerText}>Don't have an account?
+          <TouchableOpacity onPress={()  => router.push('/register')}>
+            <Text style={{color: 'white', marginBottom: -4, marginLeft: 5}}>Register</Text>
+          </TouchableOpacity>
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -54,50 +65,61 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems:'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#264E36',
     padding: 16,
   },
-  input: {
-    height: 40,
-    width: '100%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 15,
-    padding: 8,
-    borderRadius: 10,
-    fontSize: 18,
-  },
-  logo:{
-    height: 150,
-    width: 150,
-    borderRadius: 999,
-    position: 'absolute',
-    top: 90,
-  },
-  button: {
-    backgroundColor: 'green',
-    padding: 10,
-    borderRadius: 999,
-    marginTop: 10,
-    width: '80%',
-    display: 'flex',
-    alignContent: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
+  logoText: {
+    fontSize: 42,
     color: 'white',
-    fontSize: 20,
-    textAlign: 'center',
+    marginBottom: 32,
+    fontFamily: 'TiltPrism-Regular'
   },
-  welcome: {
-    fontSize: 35,
-    marginBottom: 70,
-    marginTop: 5,
-    fontWeight: 'bold',
-    color: 'green'
+  title: {
+    fontSize: 17,
+    color: 'white',
+    textAlign: 'center',
+    marginTop: 10,
+    marginBottom: 10,
 
   },
+  input: {
+    width: '100%',
+    height: 40,
+    backgroundColor: 'white',
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    marginVertical: 8,
+  },
+  button: {
+    width: '100%',
+    height: 40,
+    backgroundColor: 'white',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 16,
+  },
+  buttonText: {
+    color: '#264E36',
+  },
+  forgotText: {
+    color: 'white',
+    marginVertical: 8,
+  },
+  registerText: {
+    color: 'white',
+  },
+  logoImage: {
+    width: 150,
+    height: 150,
+    marginBottom: 32,
+    marginTop: -45,
+    resizeMode: 'contain',
+    alignSelf: 'center',
+    borderRadius: 999
+  }
 });
 
 export default LoginScreen;

@@ -1,52 +1,65 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
-//import firebase from '../firebase';
+// screens/RegisterScreen.js
 import { router } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import * as Font from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
+const loadFonts = () => {
+  return Font.loadAsync({
+    'TiltPrism-Regular': require('../assets/fonts/TiltPrism-Regular.ttf'),
+  });
+};
 const RegisterScreen = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const handleRegister= () => {
+    router.push('/')
+  }
 
-  const handleRegister = () => {
-    // firebase.auth().signInWithEmailAndPassword(email, password)
-    //   .then(() => {
-    //     console.log('User signed in!');
-    //     navigation.navigate('Home');
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
-    router.push("/")
-  };
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+  useEffect(() => {
+    loadFonts().then(() => setFontsLoaded(true));
+  }, []);
+
+  // if (!fontsLoaded) {
+  //   return <AppLoading />;
+  // }
+
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../assets/images/logo.jpg")}
-        style={styles.logo}
-      />
-      <Text style={styles.new}>New to Cooksome? 
-        Sign Up here
-      </Text>
+       <Image style={styles.logoImage} source= {require('../assets/images/logo.jpg')}/>
+      <Text style={styles.logoText}>CookSome</Text>
+      <Text style={styles.title}>Create an Account</Text>
       <TextInput
+        style={styles.input}
         placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.input}
+        placeholderTextColor="#A3A3A3"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        autoCorrect={false}
       />
       <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
         style={styles.input}
+        placeholder="Password"
+        placeholderTextColor="#A3A3A3"
+        secureTextEntry
+        autoCapitalize="none"
+        autoCorrect={false}
       />
-
-      <TouchableOpacity onPress={handleRegister} style={styles.button}>
+      <TextInput
+        style={styles.input}
+        placeholder="Confirm Password"
+        placeholderTextColor="#A3A3A3"
+        secureTextEntry
+        autoCapitalize="none"
+        autoCorrect={false}
+      />
+      <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
-
-      <Text style={{color: 'green', marginTop: 20,}} onPress={() => router.push('/')}> Go to Login</Text>
+      <TouchableOpacity style={styles.loginButton} onPress={() => router.push('/')}>
+        <Text style={styles.loginText}>Already have an account? Login</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -54,53 +67,62 @@ const RegisterScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems:'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#264E36',
     padding: 16,
   },
-  input: {
-    height: 40,
-    width: '100%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 15,
-    padding: 8,
-    borderRadius: 10,
-    fontSize: 18,
+  logoText: {
+    fontSize: 32,
+    color: '#fff',
+    fontWeight: 'bold',
+    marginBottom: 32,
   },
-  logo:{
-    height: 150,
-    width: 150,
-    borderRadius: 999,
-    position: 'absolute',
-    top: 90,
+  title: {
+    fontSize: 24,
+    color: '#fff',
+    textAlign: 'center',
+    marginBottom: 32,
+  },
+  input: {
+    width: '100%',
+    height: 48,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    marginVertical: 8,
+    fontSize: 16,
+    color: '#000',
   },
   button: {
-    backgroundColor: 'blue',
-    padding: 10,
-    borderRadius: 999,
-    marginTop: 10,
-    width: '80%',
-    display: 'flex',
-    alignContent: 'center',
+    width: '100%',
+    height: 48,
+    backgroundColor: '#fff',
+    borderRadius: 8,
     justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 16,
   },
   buttonText: {
-    color: 'white',
-    fontSize: 20,
-    textAlign: 'center',
-    
+    color: '#264E36',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
-  new: {
-    color: 'blue',
-    fontSize: 20,
-    marginEnd: 10,
-    marginBottom: 10,
-    display: 'flex',
-    textAlign: 'center',
-    textTransform: 'capitalize',
-    fontWeight: 'bold'
-  }
+  loginButton: {
+    marginTop: 16,
+  },
+  loginText: {
+    color: '#fff',
+  },
+  logoImage: {
+    width: 150,
+    height: 150,
+    marginBottom: 32,
+    marginTop: -45,
+    resizeMode: 'contain',
+    alignSelf: 'center',
+    borderRadius: 999
+  },
 });
 
 export default RegisterScreen;
