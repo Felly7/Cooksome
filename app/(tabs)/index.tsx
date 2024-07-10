@@ -21,7 +21,7 @@ const HomeScreen = () => {
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollContainer}>
             <View style={styles.card}>
             <Image style={styles.image} source={require('../../assets/images/jollof.jpg')} />
-            <Text style={styles.cardTitle}>Afternoon Jollof</Text>
+            <Text style={styles.cardTitle}>Jollof</Text>
             <Text style={styles.cardDescription}>Red hot tasty jollof rice.</Text>
             </View>
             <View style={styles.card}>
