@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity,Image } from 'react-native';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { loginUser } from '../services/api';
+import { useUser } from './UserContext';
 
 
 const loadFonts = () => {
@@ -13,10 +15,25 @@ const loadFonts = () => {
 };
 
 const LoginScreen = () => {
+    const { setUser } = useUser();
 
-  const handlelogin =()=>{
-    router.push('(tabs)')
-  }
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      const data = await loginUser(email, password);
+      setUser({
+        id: data.user.id,
+        name: data.user.name,
+        email: data.user.email,
+        token: data.token
+      });
+  router.push('(tabs)');
+    } catch (error) {
+      alert(error.error || 'Login failed');
+    }
+  };
 
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
@@ -31,12 +48,14 @@ const LoginScreen = () => {
       <Image style={styles.logoImage} source= {require('../assets/images/logo.jpg')}/>
       <Text style={styles.logoText}>CookSome</Text>
       <Text style={styles.title}>Chef up your own dish with Cooksome</Text>
-      <TextInput
+     <TextInput
         style={styles.input}
         placeholder="Email"
         keyboardType="email-address"
         autoCapitalize="none"
         autoCorrect={false}
+        value={email}
+        onChangeText={setEmail}
       />
       <TextInput
         style={styles.input}
@@ -44,8 +63,10 @@ const LoginScreen = () => {
         secureTextEntry
         autoCapitalize="none"
         autoCorrect={false}
+        value={password}
+        onChangeText={setPassword}
       />
-      <TouchableOpacity style={styles.button} onPress={handlelogin}>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Explore the app</Text>
       </TouchableOpacity>
       <TouchableOpacity>

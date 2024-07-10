@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { registerUser } from '../services/api';
 
 const loadFonts = () => {
   return Font.loadAsync({
@@ -11,9 +12,20 @@ const loadFonts = () => {
   });
 };
 const RegisterScreen = () => {
-  const handleRegister= () => {
-    router.push('/')
-  }
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleRegister = async () => {
+    try {
+      const data = await registerUser(name, email, password);
+      console.log('Registration successful', data);
+      // Save token to secure storage or context
+      router.push('/');
+    } catch (error) {
+      alert(error.error || 'Registration failed');
+    }
+  };
 
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
@@ -30,29 +42,30 @@ const RegisterScreen = () => {
        <Image style={styles.logoImage} source= {require('../assets/images/logo.jpg')}/>
       <Text style={styles.logoText}>CookSome</Text>
       <Text style={styles.title}>Create an Account</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Name"
+          autoCorrect={false}
+          value={name}
+          onChangeText={setName}
+        />
       <TextInput
         style={styles.input}
         placeholder="Email"
-        placeholderTextColor="#A3A3A3"
         keyboardType="email-address"
         autoCapitalize="none"
         autoCorrect={false}
+        value={email}
+        onChangeText={setEmail}
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
-        placeholderTextColor="#A3A3A3"
         secureTextEntry
         autoCapitalize="none"
         autoCorrect={false}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm Password"
-        placeholderTextColor="#A3A3A3"
-        secureTextEntry
-        autoCapitalize="none"
-        autoCorrect={false}
+        value={password}
+        onChangeText={setPassword}
       />
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>

@@ -1,12 +1,58 @@
-// screens/HomeScreen.js
-import React from 'react';
-import { View, Text, TextInput, StyleSheet, ScrollView, Image, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, StyleSheet, ScrollView, Image, SafeAreaView, StatusBar, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
+import { useUser } from '../UserContext';
+import { getFoodData } from '../../services/api';
+import { router } from 'expo-router';
+
+
 
 const HomeScreen = () => {
+const { user } = useUser();
+ const [foodData, setFoodData] = useState([]);
+ const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFoodData = async () => {
+      try {
+        const data = await getFoodData();
+        setFoodData(data.results);
+      } catch (error) {
+        console.error('Failed to fetch food data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFoodData();
+  }, []);
+
+  const handleFoodDetails = (id) => {
+    router.push(`/details?id=${id}`);
+  };
+
+    if (loading) {
+      return (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      );
+    }
+
+    const renderItem = ({ item }) => (
+        <TouchableOpacity onPress={() => handleFoodDetails(item.id)}>
+          <View style={styles.card}>
+            <Image style={styles.image} source={{ uri: item.image }} />
+            <Text style={styles.cardTitle}>{item.title}</Text>
+            <Text style={styles.cardDescription}>Delicious {item.title} recipe.</Text>
+          </View>
+      </TouchableOpacity>
+    );
+
+
   return (
     <SafeAreaView style={styles.container}>
         <ScrollView>
-        <Text style={styles.title}>Embark on Your Cooking Journey</Text>
+        <Text style={styles.title}>Embark on Your Cooking Journey, <Text style={styles.name}>{user?.name}</Text></Text>
         <TextInput
             style={styles.searchInput}
             placeholder="Search"
@@ -19,16 +65,13 @@ const HomeScreen = () => {
         </View>
         <Text style={styles.subtitle}>Need to try</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollContainer}>
-            <View style={styles.card}>
-            <Image style={styles.image} source={require('../../assets/images/jollof.jpg')} />
-            <Text style={styles.cardTitle}>Jollof</Text>
-            <Text style={styles.cardDescription}>Red hot tasty jollof rice.</Text>
-            </View>
-            <View style={styles.card}>
-            <Image style={styles.image} source={require('../../assets/images/pasta.jpg')} />
-            <Text style={styles.cardTitle}>Pasta</Text>
-            <Text style={styles.cardDescription}>Ghanaian style spaghetti with shrimp and tomato sauce.</Text>
-            </View>
+              <FlatList
+                data={foodData}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id.toString()}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+              />
         </ScrollView>
         <Text style={styles.subtitle}>Cook in 15mins selection</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollContainer}>
@@ -56,10 +99,15 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight,
   },
   title: {
-    fontSize: 24,
+    fontSize: 16,
     color: '#264E36',
     marginBottom: 16,
   },
+name: {
+  fontSize: 20,
+  color: '#264E36',
+  marginBottom: 16,
+},
   searchInput: {
     height: 40,
     backgroundColor: '#fff',
