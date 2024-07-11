@@ -12,13 +12,13 @@ const loadFonts = () => {
   });
 };
 const RegisterScreen = () => {
-  const [name, setName] = useState('');
+  const [FirstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleRegister = async () => {
     try {
-      const data = await registerUser(name, email, password);
+      const data = await registerUser(FirstName, email, password);
       console.log('Registration successful', data);
       // Save token to secure storage or context
       router.push('/');
@@ -44,10 +44,10 @@ const RegisterScreen = () => {
       <Text style={styles.title}>Create an Account</Text>
         <TextInput
           style={styles.input}
-          placeholder="Name"
+          placeholder="FirstName"
           autoCorrect={false}
-          value={name}
-          onChangeText={setName}
+          value={FirstName}
+          onChangeText={setFirstName}
         />
       <TextInput
         style={styles.input}

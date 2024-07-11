@@ -5,6 +5,7 @@ import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome6 } from '@expo/vector-icons';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -33,6 +34,15 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="bookmark"
+        options={{
+            title: 'Bookmark',
+             tabBarIcon: ({ color, focused }) => (
+                 <FontAwesome6 name="book-bookmark" size={24} color="black" />
+             ),
+        }}
+    />
     </Tabs>
   );
 }

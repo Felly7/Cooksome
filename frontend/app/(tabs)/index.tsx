@@ -57,6 +57,7 @@ const { user } = useUser();
             style={styles.searchInput}
             placeholder="Search"
         />
+        <Text style={styles.category}>  Categories </Text>
         <View style={styles.categoryContainer}>
             <Text style={styles.categoryText}>Special</Text>
             <Text style={styles.categoryText}>Breakfast</Text>
@@ -145,6 +146,10 @@ name: {
     borderRadius: 8,
     marginBottom: 8,
   },
+  category: {
+      fontSize: 22,
+      fontWeight: 'bold',
+      },
   cardTitle: {
     fontSize: 16,
     color: '#264E36',
