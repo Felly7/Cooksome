@@ -36,6 +36,7 @@ export default function RootLayout() {
             <Stack.Screen name="register" options={{ headerShown: false }} />
             <Stack.Screen name="details" options={{ headerShown: false }} />
             <Stack.Screen name="bookmark" options={{ headerShown: false }} />
+            <Stack.Screen name="GoogleSignIn" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" />
           </Stack>
         </ThemeProvider>

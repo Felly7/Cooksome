@@ -5,6 +5,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'reac
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { registerUser } from '../services/api';
+import { GoogleSignIn} from '../app/GoogleSignIn';
 
 const loadFonts = () => {
   return Font.loadAsync({

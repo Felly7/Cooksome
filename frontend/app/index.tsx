@@ -6,6 +6,7 @@ import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { loginUser } from '../services/api';
 import { useUser } from './UserContext';
+import Google from '../components/GoogleSignIn'
 
 
 const loadFonts = () => {
@@ -79,6 +80,7 @@ const LoginScreen = () => {
           </TouchableOpacity>
         </Text>
       </TouchableOpacity>
+      <Google />
     </View>
   );
 };
