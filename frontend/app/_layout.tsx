@@ -31,12 +31,15 @@ export default function RootLayout() {
       <UserProvider>
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
           <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="home" options={{ headerShown: false }} />
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="register" options={{ headerShown: false }} />
             <Stack.Screen name="details" options={{ headerShown: false }} />
             <Stack.Screen name="bookmark" options={{ headerShown: false }} />
-            <Stack.Screen name="GoogleSignIn" options={{ headerShown: false }} />
+            <Stack.Screen name="search" options={{ headerShown: false }} />
+            <Stack.Screen name="profile" options={{ headerShown: false }} />
+            <Stack.Screen name="add" options={{ headerShown: false }} />
+
             <Stack.Screen name="+not-found" />
           </Stack>
         </ThemeProvider>

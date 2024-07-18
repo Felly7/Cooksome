@@ -30,7 +30,7 @@ const LoginScreen = () => {
         email: data.user.email,
         token: data.token
       });
-  router.push('(tabs)');
+  router.push('home');
     } catch (error) {
       alert(error.error || 'Login failed');
     }
@@ -74,11 +74,9 @@ const LoginScreen = () => {
         <Text style={styles.forgotText}>Forgot password?</Text>
       </TouchableOpacity>
       <TouchableOpacity>
-        <Text style={styles.registerText}>Don't have an account?
           <TouchableOpacity onPress={()  => router.push('/register')}>
-            <Text style={{color: 'white', marginBottom: -4, marginLeft: 5}}>Register</Text>
+            <Text style={styles.registerText}>Don't have an account? Register</Text>
           </TouchableOpacity>
-        </Text>
       </TouchableOpacity>
       <Google />
     </View>
