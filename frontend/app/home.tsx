@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, ScrollView, Image, SafeAreaView, Sta
 import { useUser } from './UserContext';
 import { getFoodData } from '../services/api';
 import { router } from 'expo-router';
-import Icon from 'react-native-vector-icons/Ionicons';
+import BottomNav from '@/components/BottomNav';
 
 const HomeScreen = () => {
     const { user } = useUser();
@@ -59,10 +59,6 @@ const HomeScreen = () => {
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 <Text style={styles.title}>What would you like to cook today, <Text style={styles.name}>{user?.name}</Text>?</Text>
-                <TextInput
-                    style={styles.searchInput}
-                    placeholder="Search any recipes"
-                />
                 <Text style={styles.categoryTitle}>Categories</Text>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryContainer}>
                     <TouchableOpacity style={styles.categoryButton}>
@@ -119,13 +115,7 @@ const HomeScreen = () => {
                  style={styles.scrollContainer}
              />
             </ScrollView>
-            <View style={styles.bottomNav}>
-                <TouchableOpacity onPress={() => router.push('/home')}><Icon name="home-outline" size={30} color="#264E36" /></TouchableOpacity>
-                <TouchableOpacity onPress={() => router.push('/search')}><Icon name="search-outline" size={30} color="#264E36" /></TouchableOpacity>
-                <TouchableOpacity onPress={() => router.push('/add')} style={styles.addButton}><Icon name="add-outline" size={30} color="#fff" /></TouchableOpacity>
-                <TouchableOpacity onPress={() => router.push('/bookmark')}><Icon name="bookmark-outline" size={30} color="#264E36" /></TouchableOpacity>
-                <TouchableOpacity onPress={() => router.push('/profile')}><Icon name="person-outline" size={30} color="#264E36" /></TouchableOpacity>
-            </View>
+            <BottomNav />
         </SafeAreaView>
     );
 };
@@ -146,13 +136,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#264E36',
         fontWeight: 'bold',
-    },
-    searchInput: {
-        height: 40,
-        backgroundColor: '#fff',
-        borderRadius: 8,
-        paddingHorizontal: 16,
-        marginBottom: 16,
     },
     categoryTitle: {
         fontSize: 22,
@@ -207,20 +190,6 @@ const styles = StyleSheet.create({
     cardDescription: {
         fontSize: 14,
         color: '#767676',
-    },
-    bottomNav: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        height: 60,
-        backgroundColor: '#F6F4EF',
-        borderTopWidth: 1,
-        borderTopColor: '#ddd',
-    },
-    addButton: {
-        backgroundColor: '#264E36',
-        borderRadius: 30,
-        padding: 10,
     },
     loaderContainer: {
         flex: 1,

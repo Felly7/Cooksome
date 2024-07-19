@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const API_URL = 'http://172.20.10.4:3000';
+const API_URL = 'http://10.132.103.45:3000';
 const SPOONACULAR_URL = 'https://api.spoonacular.com/recipes/complexSearch';
 const SPOONACULAR_DETAILS_URL = 'https://api.spoonacular.com/recipes/{id}/information';
 
 // Get Spoonacular API Key from environment variables
-const SPOONACULAR_API_KEY = process.env.SPOONACULAR_API_KEY || 'f303d10d88d24c4889e3a111b942d5d5';
+const SPOONACULAR_API_KEY = process.env.SPOONACULAR_API_KEY || 'f57cba535cdb427bae6873cffc117686';
 
 // Register User
 export const registerUser = async (name: string, email: string, password: string) => {
@@ -59,7 +59,22 @@ export const getFoodDetails = async (id) => {
         includeNutrition: true,
       },
     });
-    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching food details:', error);
+    throw error;
+  }
+};
+
+export const getSearchResults = async (search) => {
+  try {
+    const response = await axios.get(SPOONACULAR_URL, {
+      params: {
+        apiKey: SPOONACULAR_API_KEY,
+        query: search,
+        number: 10,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error('Error fetching food details:', error);
