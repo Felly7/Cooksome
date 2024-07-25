@@ -1,23 +1,120 @@
-import { StyleSheet, Text, View, SafeAreaView, StatusBar } from 'react-native'
-import React from 'react'
-import BottomNav from '@/components/BottomNav'
+import { router } from 'expo-router';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, StyleSheet, ScrollView, Image, SafeAreaView, StatusBar, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
+import { useUser } from './UserContext';
+import BottomNav from '@/components/BottomNav';
 
-const profile = () => {
+export default function ProfileScreen() {
+  const user = useUser();
+
+  if (!user) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text>profile</Text>
-      <BottomNav />
-    </SafeAreaView>
-  )
-}
+      <ScrollView>
+        <Text style={styles.title}>Settings</Text>
 
-export default profile
+        <TouchableOpacity style={styles.item} onPress={() => router.push('UserProfile')}>
+          <Icon name="person-outline" size={40} color="#264E36" />
+    
+        <View style={styles.itemTextContainer}>
+          <Text style={styles.itemTitle}>User Profile</Text>
+          <Text style={styles.itemSubtitle}>Email, Phone, Addresses, and Identity</Text>
+        </View>
+        <Icon name="chevron-right" size={40} color="#ccc" />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.item} onPress={() => router.push('SecurityScreen')}>
+        <Icon name="security" size={40} color="#264E36" />
+        <View style={styles.itemTextContainer}>
+          <Text style={styles.itemTitle}>Security and Privacy</Text>
+          <Text style={styles.itemSubtitle}>Passcodes, Fingerprints, and Privacy</Text>
+        </View>
+        <Icon name="chevron-right" size={40} color="#ccc" />
+      </TouchableOpacity>
+     
+     
+      <TouchableOpacity style={styles.item} onPress={() => router.push('HelpSupport')}>
+        <Icon name="help-outline" size={40} color="#264E36" />
+        <View style={styles.itemTextContainer}>
+          <Text style={styles.itemTitle}>Help and Support</Text>
+          <Text style={styles.itemSubtitle}>For any question, contact us</Text>
+        </View>
+        <Icon name="chevron-right" size={40} color="#ccc" />
+      </TouchableOpacity>
+        <TouchableOpacity style={styles.item} onPress={() => router.push('Logout')}>
+        <Icon name="logout" size={40} color="#264E36" />
+        <View style={styles.itemTextContainer}>
+          <Text style={styles.itemTitle}>Log out</Text>
+        </View>
+        <Icon name="chevron-right" size={40} color="#ccc" />
+          </TouchableOpacity>
+        </ScrollView>
+        <BottomNav />
+      </SafeAreaView>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F6F4EF',
     padding: 16,
-    marginTop: StatusBar.currentHeight,
-  }
-})
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginVertical: 30,
+  },
+  profileInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 16,
+  },
+  profileImage: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    marginRight: 16,
+  },
+  name: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  email: {
+    fontSize: 16,
+    color: 'gray',
+  },
+  status: {
+    fontSize: 16,
+    color: 'blue',
+  },
+  preferencesTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  item: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  itemTextContainer: {
+    flex: 1,
+    marginLeft: 16,
+  },
+  itemTitle: {
+    fontSize: 16,
+  },
+  itemSubtitle: {
+    fontSize: 14,
+    color: 'gray',
+  },
+});

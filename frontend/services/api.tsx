@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://10.132.103.45:3000';
+const API_URL = 'http://172.20.10.4:3000';
 const SPOONACULAR_URL = 'https://api.spoonacular.com/recipes/complexSearch';
 const SPOONACULAR_DETAILS_URL = 'https://api.spoonacular.com/recipes/{id}/information';
 

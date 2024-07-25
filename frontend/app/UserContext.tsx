@@ -8,6 +8,8 @@ type User = {
 };
 
 type UserContextType = {
+  name: ReactNode;
+  email: ReactNode;
   user: User | null;
   setUser: (user: User | null) => void;
 };
