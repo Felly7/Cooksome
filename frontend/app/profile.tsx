@@ -1,12 +1,28 @@
 import { router } from 'expo-router';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet, ScrollView, Image, SafeAreaView, StatusBar, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, ScrollView, Image, SafeAreaView, StatusBar, ActivityIndicator, FlatList, TouchableOpacity, Alert } from 'react-native';
 import { useUser } from './UserContext';
 import BottomNav from '@/components/BottomNav';
 
 export default function ProfileScreen() {
   const user = useUser();
+
+  const handleLogout = () => {
+    Alert.alert(
+      "Log Out",
+      "Are you sure you want to log out?",
+      [
+        {
+          text: "No",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Yes", onPress: () => router.push('/') }
+      ],
+      { cancelable: false }
+    );
+  };
 
   if (!user) {
     return (
@@ -48,7 +64,7 @@ export default function ProfileScreen() {
         </View>
         <Icon name="chevron-right" size={40} color="#ccc" />
       </TouchableOpacity>
-        <TouchableOpacity style={styles.item} onPress={() => router.push('Logout')}>
+        <TouchableOpacity style={styles.item} onPress={handleLogout}>
         <Icon name="logout" size={40} color="#264E36" />
         <View style={styles.itemTextContainer}>
           <Text style={styles.itemTitle}>Log out</Text>

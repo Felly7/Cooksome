@@ -9,7 +9,7 @@ const BottomNav = () => {
     <View style={styles.bottomNav}>
     <TouchableOpacity onPress={() => router.push('/home')}><Icon name="home-outline" size={30} color="#264E36" /></TouchableOpacity>
     <TouchableOpacity onPress={() => router.push('/search')}><Icon name="search-outline" size={30} color="#264E36" /></TouchableOpacity>
-    <TouchableOpacity onPress={() => router.push('/add')} style={styles.addButton}><Icon name="add-outline" size={30} color="#fff" /></TouchableOpacity>
+    <TouchableOpacity onPress={() => router.push('/addNoteScreen')} style={styles.addButton}><Icon name="add-outline" size={30} color="#fff" /></TouchableOpacity>
     <TouchableOpacity onPress={() => router.push('/bookmark')}><Icon name="bookmark-outline" size={30} color="#264E36" /></TouchableOpacity>
     <TouchableOpacity onPress={() => router.push('/profile')}><Icon name="person-outline" size={30} color="#264E36" /></TouchableOpacity>
 </View>

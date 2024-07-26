@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const API_URL = 'http://172.20.10.4:3000';
+const API_URL = 'http://10.133.226.210:3000';
 const SPOONACULAR_URL = 'https://api.spoonacular.com/recipes/complexSearch';
 const SPOONACULAR_DETAILS_URL = 'https://api.spoonacular.com/recipes/{id}/information';
 
 // Get Spoonacular API Key from environment variables
-const SPOONACULAR_API_KEY = process.env.SPOONACULAR_API_KEY || 'f57cba535cdb427bae6873cffc117686';
+const SPOONACULAR_API_KEY = process.env.SPOONACULAR_API_KEY || 'f303d10d88d24c4889e3a111b942d5d5';
 
 // Register User
 export const registerUser = async (name: string, email: string, password: string) => {
