@@ -39,9 +39,12 @@ export default function RootLayout() {
             <Stack.Screen name="search" options={{ headerShown: false }} />
             <Stack.Screen name="profile" options={{ headerShown: false }} />
             <Stack.Screen name="add" options={{ headerShown: false }} />
-            <Stack.Screen name="HelpScreen" options={{ headerShown: false }} />
+            <Stack.Screen name="HelpSupport" options={{ headerShown: false }} />
             <Stack.Screen name="LogoutScreen" options={{ headerShown: false }} />
             <Stack.Screen name="UserProfile" options={{ headerShown: false }} />
+            <Stack.Screen name="SecurityScreen" options={{ headerShown: false }} />
+            <Stack.Screen name="TwoFactorAuthScreen" options={{ headerShown: false }} />
+            <Stack.Screen name="ChangePasscode" options={{ headerShown: false }} />
 
             <Stack.Screen name="+not-found" />
           </Stack>

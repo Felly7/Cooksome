@@ -8,22 +8,14 @@ import BottomNav from '@/components/BottomNav';
 const HomeScreen = () => {
     const { user } = useUser();
     const [foodData, setFoodData] = useState([]);
-    const [foodData2, setFoodData2] = useState([]);
-    const [foodData3, setFoodData3] = useState([]);
-    const [foodData4, setFoodData4] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchFoodData = async () => {
             try {
-                const data = await getFoodData(0);
-                const data2 = await getFoodData(30);
-                const data3 = await getFoodData(60);
-                const data4 = await getFoodData(90);
-                setFoodData(data.results);
-                setFoodData2(data2.results);
-                setFoodData3(data3.results);
-                setFoodData4(data4.results);
+                const data = await getFoodData();
+                console.log(data)
+                setFoodData(data);
             } catch (error) {
                 console.error('Failed to fetch food data:', error);
             } finally {
@@ -58,62 +50,28 @@ const HomeScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
+                
                 <Text style={styles.title}>What would you like to cook today, <Text style={styles.name}>{user?.name}</Text>?</Text>
                 <Text style={styles.categoryTitle}>Categories</Text>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryContainer}>
                     <TouchableOpacity style={styles.categoryButton}>
                     <Image style={styles.categoryIcon} source={require('../assets/images/breakfast.jpg')}/>
-                    <Text style={styles.categoryText}>Breakfast</Text>
+                    <Text style={styles.categoryText}>International</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.categoryButton}>
-                    <Image style={styles.categoryIcon} source={require('../assets/images/lunch.jpg')}/>    
-                    <Text style={styles.categoryText}>Lunch</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.categoryButton}>
                     <Image style={styles.categoryIcon} source={require('../assets/images/dinner.jpg')}/>    
-                    <Text style={styles.categoryText}>Dinner</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.categoryButton}>
-                    <Image style={styles.categoryIcon} source={require('../assets/images/dessert.jpg')}/>    
-                    <Text style={styles.categoryText}>Dessert</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.categoryButton}>
-                    <Image style={styles.categoryIcon} source={require('../assets/images/snack.jpg')}/>    
-                    <Text style={styles.categoryText}>Snack</Text></TouchableOpacity>
+                    <Text style={styles.categoryText}>Local</Text></TouchableOpacity>
                 </ScrollView>
                 <Text style={styles.subtitle}>Recommendation</Text>
                 <FlatList
                     data={foodData}
                     renderItem={renderItem}
-                    keyExtractor={(item) => item.id.toString()}
+                    keyExtractor={(item) => item._id.toString()}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     style={styles.scrollContainer}
                 />
-                <Text style={styles.subtitle}>Want some of these?</Text>
-               <FlatList
-                   data={foodData2}
-                   renderItem={renderItem}
-                   keyExtractor={(item) => item.id.toString()}
-                   horizontal
-                   showsHorizontalScrollIndicator={false}
-                   style={styles.scrollContainer}
-               />
-              <Text style={styles.subtitle}>Easy to make</Text>
-              <FlatList
-                  data={foodData3}
-                  renderItem={renderItem}
-                  keyExtractor={(item) => item.id.toString()}
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  style={styles.scrollContainer}
-              />
-             <Text style={styles.subtitle}>Must try</Text>
-             <FlatList
-                 data={foodData4}
-                 renderItem={renderItem}
-                 keyExtractor={(item) => item.id.toString()}
-                 horizontal
-                 showsHorizontalScrollIndicator={false}
-                 style={styles.scrollContainer}
-             />
+    
             </ScrollView>
             <BottomNav />
         </SafeAreaView>

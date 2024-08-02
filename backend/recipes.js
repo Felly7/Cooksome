@@ -10,10 +10,10 @@ dotenv.config();
   {
     id: '1',
     title: 'Jollof',
-    image: 'http://localhost:3000:/1.jpg',
+    image: 'http://localhost:3000/1.jpg',
     cookingMinutes: '45-60',
     dairyFree: 'false',
-    dishType: ['lunch', 'main course', 'main dish', 'dinner'], // Array of strings
+    dishType: ['lunch', 'main course', 'supper', 'dinner'], // Array of strings
     ingredients: [
       {
         id: '1',
@@ -82,10 +82,10 @@ dotenv.config();
 {
     id: '2',
     title: ' Banku ',
-    image: 'http://localhost:3000:/2.jpg',
+    image: 'http://localhost:3000/2.jpg',
     cookingMinutes: '40-60mins',
     dairyFree: 'false',
-    dishType: ['lunch', 'main course', 'main dish', 'dinner'],
+    dishType: ['lunch','supper', 'dinner'],
     ingredients: [
       {
         id: '1',
@@ -117,10 +117,10 @@ dotenv.config();
 {
     id: '3',
     title: 'Garden Egg Stew  ',
-    image: 'http://localhost:3000:/3.jpg',
+    image: 'http://localhost:3000/3.jpg',
     cookingMinutes: '20-30mins',
     dairyFree: 'false',
-    dishType: ['lunch', 'main course', 'main dish', 'dinner'],
+    dishType: [' Servings '],
     ingredients: [
       {
         id: '1',
@@ -194,10 +194,10 @@ dotenv.config();
 {
     id: '4',
     title: 'Waakye',
-    image: 'http://localhost:3000:/4.jpg',
+    image: 'http://localhost:3000/4.jpg',
     cookingMinutes: '60',
     dairyFree: 'false',
-    dishType: ['lunch', 'main course', 'main dish', 'dinner'],
+    dishType: ['lunch', 'main course', 'supper', 'dinner'],
     ingredients: [
       {
         id: '1',
@@ -228,11 +228,11 @@ dotenv.config();
   },
   {
     id: '5',
-    title: 'Braised Rice with Red Hot pepper',
-    image: 'http://localhost:3000:/5.jpg',
+    title: 'Braised Rice with fried egg and hot red pepper',
+    image: 'http://localhost:3000/5.jpg',
     cookingMinutes: '25-40',
     dairyFree: 'false',
-    dishType: ['lunch', 'main course', 'main dish', 'dinner'],
+    dishType: ['lunch', 'main course', 'supper', 'dinner'],
     ingredients: [
       {
         id: '1',
@@ -264,47 +264,216 @@ dotenv.config();
         unit: 'pieces',
         amount: 4-6,
       },
+      {
+        id: '6',
+        originalName: 'Eggs',
+        unit: 'pieces',
+        amount: 1-2,
+      },
+      
 
     ],
-    CookingProcedure: '1. 2. 3. 4. .5. ',
+    CookingProcedure: '1. Put appreciable amount of cooking oil in a heated saucepan and cook for about 1 minute. 2. Slice onions into smaller size and add them to the heated cooking oil. 3. Let it cook for about 2-3minutes and add your rice to the mixture 4. Stir the mixture and let it cook for about 1 minute. 5. Add water to appreciable amount of the mixture and add salt. Taste to check if the salt is okay. 6. Cover the saucepan with a lid and lave it to cook for about 15 minutes. 7. Check if all water has been absorbed and take some grains if they are hard or soft. 8. If hard, sprinkle small amount of water over the rice and lower the cooking temperature of the fire. 9. If soft, lower the cooking fire temperature and start working on your pepper. 10. Wash your pepper and onions and blend them. Add salt to enhance the taste. 11. Fry your eggs. 12. check the rice again after about 5-7 minutes and if it is soft as you want it, turn off the fire. 12. Braised rice is usually served with red hot pepper and fried eggs, sometimes with sardine and salad.  ',
   },
-  // {
-  // id: '',
-  // title: '',
-  // image: 'http://localhost:3000:/.jpg',
-  // cookingMinutes: '',
-  // dairyFree: 'false',
-  // dishType: ['lunch', 'main course', 'main dish', 'dinner'],
-  // ingredients: [
-  //   {
-  //     id: '1',
-  //     originalName: '',
-  //     unit: '',
-  //     amount: ,
-  //   },
-  //   {
-  //     id: '2',
-  //     originalName: '',
-  //     unit: '',
-  //     amount: ,
-  //   },
-  //   {
-  //     id: '3',
-  //     originalName: '',
-  //     unit: '',
-  //     amount: 1-2,
-  //   },
-  
-
+   {
+   id: '6',
+   title: 'Tombrown',
+   image: 'http://localhost:3000/6.jpg',
+   cookingMinutes: '5',
+   dairyFree: 'false',
+   dishType: ['breakfast', 'main dish', ],
+   ingredients: [
+     {
+       id: '1',
+       originalName: 'Tombrown',
+       unit: '0.2-0.5',
+       amount: 2-3,
+     },
+     {
+       id: '2',
+       originalName: 'Sugar',
+       unit: 'tbsp',
+       amount: 2-3,
+     },
+     {
+       id: '3',
+       originalName: 'Water',
+       unit: 'cups',
+       amount: 1-2,
+     },
+     {
+      id: '4',
+      originalName: 'Milk',
+      unit: 'tbsp',
+      amount: 2-3,
+    },
+],
+CookingProcedure:'1. Pour the amount of tombrown you want to cook in a cooking pot. 2. Add water to the tombrown in the cooking pot and mix thoroughly with a laddle or your hands. 3. Mix till it becomes completely liquid. 4. Put the mixture on a low fire and keep stirring with a laddle to avoid formation of dumops. 5. Continue stirring till the mixture starts to harden. 6. Cover the cooking pot with a lid and wait for about 2-4 minutes. 7. Turm off the fire and serve your tombrown in a bowl. 8. Add suagr and milk. 9. Tombrown is usually served with bread, sometimes with eggs and margarine.'
+},
+{
+  id: '7',
+  title: 'Fried spaghetti',
+  image: 'http://localhost:3000/7.jpg',
+  cookingMinutes: '15-20',
+  dairyFree: 'false',
+  dishType: ['lunch', 'main course', 'supper', 'dinner'],
+  ingredients: [
+    {
+      id: '1',
+      originalName: 'Spaghetti',
+      unit: 'medium size',
+      amount: 1,
+    },
+    {
+      id: '2',
+      originalName: 'Cooking oil',
+      unit: 'tbsp',
+      amount: 3-5,
+    },
+    {
+      id: '3',
+      originalName: 'Salt',
+      unit: 'tbsp',
+      amount: 1-2,
+    },
+    {
+      id: '4',
+      originalName: 'Powdered pepper',
+      unit: 'tbsp',
+      amount: 1-2,
+    },
+    {
+      id: '5',
+      originalName: 'Eggs',
+      unit: 'pieces',
+      amount: 1-2,
+    },
+    {
+      id: '6',
+      originalName: 'Spaghetti seasoning',
+      unit: 'tbsp',
+      amount: 1-2,
+    },
+    {
+      id: '7',
+      originalName: 'Onions',
+      unit: 'pieces',
+      amount: 1-2,
+    },
+    {
+      id: '8',
+      originalName: 'Green bell pepper',
+      unit: 'pieces',
+      amount: 1-2,
+    },
+    
+  ],
+CookingProcedure:'1. Put water in a cooking pot and put it on fire till it boils. 2. Add your spaghetti to the boiled water while still on fire. 3. Add salt small and atste to check if okay. 4. Wash your vegetables (onions, bell pepper, carrot, etc) and cut them into smaller pieces. 5. Once your spaghetti finishes cooking, turn off the fire and drain the remaining water from it using a sieve. 6. Put cooking oil into a frying pan and put it on fire. 7. Once heated, add your vegetables and let them cook for 3-5 minutes. 8. Add your eggs to the cooking mixture and stir for about 2 minutes. 9. Add your powdered pepper and small amount of salt. 10. Add your seasoning (maggi, faricity seasoning, etc) 11. Put your spaghetti into the frying with the mixture and stir gentlely and thoroughly. 12. Taste and check if the seasoning is okay, if not you can add some to it and stir again. 13. Fried spaghetti can be served with fried sausages, eggs, sardine or meat.'
+},
+{
+  id: '8',
+  title: 'Boiled Plantain',
+  image: 'http://localhost:3000/8.jpg',
+  cookingMinutes: '20',
+  dairyFree: 'false',
+  dishType: ['lunch', 'supper', 'dinner'],
+  ingredients: [
+    {
+      id: '1',
+      originalName: 'Plantain',
+      unit: 'pieces',
+      amount: 3-5,
+    },
+    {
+      id: '2',
+      originalName: 'Salt',
+      unit: 'tbsp',
+      amount: 2-3,
+    },
+    {
+      id: '3',
+      originalName: 'Eggs',
+      unit: 'pieces',
+      amount: 1-2,
+    },
+],
+CookingProcedure:'1. Peel your plantain and soak in water. 2. Wash your peeled plantain and slice them into smaller pieces. 3. Put water into your cooking pot and transfer your sliced plantain to it. 4. Add appreciable amount of salt and put the cooking pot on fire. 5. Wash your eggs and put it in the cooking pot. 6. Cover the cooking with a foil or a white plastic bag before finally covering it with a lid. 7. Let it cook for about 15-20 minutes. 8. Check to verify if the plantain is soft and turn off the fire. 9. Drain the remaining water from the plantain and transfer to a bowl. 10. Boiled plantain are usually served with tomato sauce, garden egg stew, palava sauce, etc and eggs, fish. '
+},
+{
+  id: '9',
+  title: 'Fried Plantain',
+  image: 'http://localhost:3000/9.jpg',
+  cookingMinutes: '15',
+  dairyFree: 'true',
+  dishType: ['lunch', 'dinner'],
+  ingredients: [
+    {
+      id: '1',
+      originalName: 'Riped plantain',
+      unit: 'pieces',
+      amount: 2-4,
+    },
+    {
+      id: '2',
+      originalName: 'Cooking oil',
+      unit: 'tbsp',
+      amount: 5-8,
+    },
+    {
+      id: '3',
+      originalName: 'Salt',
+      unit: 'tbsp',
+      amount: 2-3,
+    },
+],
+CookingProcedure:'1. Peel your riped plantains. 2. Fill a bowl with water and add salt to it. 3. Slice the peeled plantain into smaller pieces and put them into the salty water. 4. Put a frying pan on fire and add appreciable amount of cooking oil. 5. Let the oil cook for 3-5 mnutes. 6. When the oil is now hot, wash your plantain in the salty water and put it in the oil. 7. Carefully turn the plantains in the hot oil over and over again til all have fried properly into a red looking plantain. 8. Do same for the rest of the plantains in the salty. 9. Riped plantains are usually served with hot red pepper, beans, vegetable sauce etc. and fish '
+},
+// {
+//   id: '10',
+//   title: 'Boiled Spaghetti with meat stew',
+//   image: 'http://localhost:3000/10.jpg',
+//   cookingMinutes: '10',
+//   dairyFree: 'false',
+//   dishType: ['lunch', 'main course', 'main dish', 'dinner'],
+//   ingredients: [
+//     {
+//       id: '1',
+//       originalName: '',
+//       unit: '',
+//       amount: '',
+//     },
+//     {
+//       id: '2',
+//       originalName: '',
+//       unit: '',
+//       amount: '',
+//     },
+//     {
+//       id: '3',
+//       originalName: '',
+//       unit: '',
+//       amount: 1-2,
+//     },
+// ],
+// CookingProcedure:''
+// },
  ]
 
- const saveRecipes = async () => {
+ const saveSampleRecipes = async () => {
   try {
+    // Remove existing recipes
+    await Recipe.deleteMany({});
+    console.log('Old recipes removed');
+
+    // Insert new recipes
     await Recipe.insertMany(recipes);
-    console.log('Recipes saved!');
-  } catch (error) {
-    console.error('Error saving recipes:', error);
+    console.log('Recipes seeded successfully');
+    
+    process.exit();
+  } catch (err) {
+    console.error('Error seeding recipes:', err);
+    process.exit(1);
   }
 };
 
-saveRecipes();
+saveSampleRecipes();

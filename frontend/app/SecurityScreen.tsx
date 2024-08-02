@@ -1,19 +1,28 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { View, Text, StyleSheet, Switch, TouchableOpacity } from 'react-native';
-
+import { View, Text, StyleSheet, Switch, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import BottomNav
+ from '@/components/BottomNav';
 export default function SecurityScreen() {
   const [is2FAEnabled, setIs2FAEnabled] = React.useState(false);
   const [isSecureLaunchEnabled, setIsSecureLaunchEnabled] = React.useState(true);
 
+  const handle2FAToggle = (value) => {
+    setIs2FAEnabled(value);
+    if (value) {
+      router.push('TwoFactorAuthScreen');
+    }
+  };
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
       <Text style={styles.title}>Security and Privacy</Text>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Security Status</Text>
         <View style={styles.switchRow}>
           <Text>Two-Factor Authentication</Text>
-          <Switch value={is2FAEnabled} onValueChange={setIs2FAEnabled} />
+          <Switch value={is2FAEnabled} onValueChange={handle2FAToggle} />
         </View>
         <View style={styles.switchRow}>
           <Text>Secure Launch</Text>
@@ -27,7 +36,9 @@ export default function SecurityScreen() {
         </TouchableOpacity>
         {/* Add other settings items here */}
       </View>
-    </View>
+      </ScrollView>
+        <BottomNav />
+    </SafeAreaView>
   );
 }
 

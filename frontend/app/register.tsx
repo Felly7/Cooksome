@@ -14,6 +14,7 @@ const loadFonts = () => {
 };
 const RegisterScreen = () => {
   const [FirstName, setFirstName] = useState('');
+  const [ PhoneNumber, setPhoneNumber] = useState ('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -45,10 +46,19 @@ const RegisterScreen = () => {
       <Text style={styles.title}>Create an Account</Text>
         <TextInput
           style={styles.input}
-          placeholder="FirstName"
+          placeholder="First Name"
           autoCorrect={false}
           value={FirstName}
           onChangeText={setFirstName}
+        />
+        <TextInput
+        style={styles.input}
+        placeholder="Phone Number"
+        keyboardType="numeric"
+        autoCapitalize="none"
+        autoCorrect={false}
+        value={email}
+        onChangeText={setPhoneNumber}
         />
       <TextInput
         style={styles.input}

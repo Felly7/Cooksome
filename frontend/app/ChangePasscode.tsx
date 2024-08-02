@@ -1,14 +1,16 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import BottomNav
+ from '@/components/BottomNav';
 export default function ChangePasscodeScreen() {
   const [oldPasscode, setOldPasscode] = React.useState('');
   const [newPasscode, setNewPasscode] = React.useState('');
   const [confirmPasscode, setConfirmPasscode] = React.useState('');
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
       <Text style={styles.title}>Change Passcode</Text>
       <TextInput
         style={styles.input}
@@ -37,7 +39,9 @@ export default function ChangePasscodeScreen() {
       <TouchableOpacity onPress={() => router.back()}>
         <Text style={styles.backText}>Take me back</Text>
       </TouchableOpacity>
-    </View>
+      </ScrollView>
+        <BottomNav />
+    </SafeAreaView>
   );
 }
 
