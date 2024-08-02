@@ -5,16 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2673df51-667f-46b5-9eaa-46767a698e3a" name="Changes" comment="Addition of bookmark tab">
-      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/(tabs)/_layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/(tabs)/bookmark.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/(tabs)/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/(tabs)/menu.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/bookmark.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/bookmark.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/details.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/recipeController.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/recipeController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/public/IMG-20240725-WA0002.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/public/IMG-20240725-WA0007.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/public/IMG-20240725-WA0009.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/public/IMG-20240725-WA0012.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/public/IMG-20240725-WA0014.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/public/IMG-20240725-WA0015.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/recipes.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/recipes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/recipeRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/recipeRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/HelpSupport.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/HelpSupport.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/services/api.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/services/api.tsx" afterDir="false" />
     </list>
@@ -44,19 +50,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\felly\OneDrive\Desktop\Cooksome\frontend\components" />
