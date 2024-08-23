@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, StatusBar, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { router } from 'expo-router';
+import BottomNav from '@/components/BottomNav';
 
 
 const BookmarkScreen = () => {
@@ -22,13 +23,7 @@ const BookmarkScreen = () => {
                     <Text style={styles.cardDescription}>Description of the made recipe.</Text>
                 </View>
             </ScrollView>
-            <View style={styles.bottomNav}>
-                <TouchableOpacity onPress={() => router.push('/')}><Icon name="home-outline" size={30} color="#264E36" /></TouchableOpacity>
-                <TouchableOpacity onPress={() => router.push('/search')}><Icon name="search-outline" size={30} color="#264E36" /></TouchableOpacity>
-                <TouchableOpacity onPress={() => router.push('/add')} style={styles.addButton}><Icon name="add-outline" size={30} color="#fff" /></TouchableOpacity>
-                <TouchableOpacity onPress={() => router.push('/bookmark')}><Icon name="bookmark-outline" size={30} color="#264E36" /></TouchableOpacity>
-                <TouchableOpacity onPress={() => router.push('/profile')}><Icon name="person-outline" size={30} color="#264E36" /></TouchableOpacity>
-            </View>
+          <BottomNav />
         </SafeAreaView>
     );
 };

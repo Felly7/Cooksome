@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { getFoodDetails } from '../services/api';
 import { useLocalSearchParams } from 'expo-router';
+import recipes from '../assets/recipe.json'
 
 const DetailsScreen = () => {
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useLocalSearchParams();
+  const [recipe, SetRecipe] = useState();
+  const [isBookmarked, setBookmarked] = useState(false);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -19,6 +22,9 @@ const DetailsScreen = () => {
         }
 
         setDetails(data);
+        const bookmarkedRecipes = JSON.parse(localStorage.getItem('bookmarkedRecipes')) || [];
+        const bookmarked = bookmarkedRecipes.some((bookmark) => bookmark.id === id);
+        setIsBookmarked(bookmarked);
       } catch (error) {
         console.error('Failed to fetch food details:', error);
       } finally {
@@ -26,8 +32,36 @@ const DetailsScreen = () => {
       }
     };
 
-    fetchDetails();
+   // fetchDetails();
+    fetchDetails2(id);
   }, [id]);
+
+
+  const fetchDetails2 = (id) => {
+   try{
+    const data2 = recipes.filter(recipe => recipe.id.includes(id));
+    setDetails(data2);
+   }  catch (error) {
+    console.error('Failed to fetch food details:', error);
+  } finally {
+    setLoading(false);
+  }
+    
+  };
+  
+  const handleBookmark = () => {
+    const bookmarkedRecipes = JSON.parse(localStorage.getItem('bookmarkedRecipes')) || [];
+  
+    if (isBookmarked) {
+      const updatedBookmarks = bookmarkedRecipes.filter((bookmark) => bookmark.id !== id);
+      localStorage.setItem('bookmarkedRecipes', JSON.stringify(updatedBookmarks));
+    } else {
+      // Add bookmark
+      bookmarkedRecipes.push(recipe);
+      localStorage.setItem('bookmarkedRecipes', JSON.stringify(bookmarkedRecipes));
+    }  
+    setIsBookmarked(!isBookmarked);
+  };
 
   if (loading) {
     return (
@@ -48,24 +82,32 @@ const DetailsScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image style={styles.image} source={{ uri: details.image }} />
+      <View style={styles.infoContainer}>
+        <Text style={styles.title}>{recipe.title}</Text>
+        {isBookmarked && <Text style={styles.bookmarkTag}>Bookmarked</Text>}
+      </View>
+      <Text style={styles.description}>{recipe.description}</Text>
+      <TouchableOpacity style={styles.bookmarkButton} onPress={handleBookmark}>
+        <Text style={styles.bookmarkButtonText}>{isBookmarked ? 'Remove Bookmark' : 'Bookmark'}</Text>
+      </TouchableOpacity>
       <Text style={styles.title}>{details.title}</Text>
-      <Text style={styles.subtitle}>Servings: {details.servings}</Text>
-      <Text style={styles.subtitle}>Ready in: {details.readyInMinutes} minutes</Text>
+      {/* <Text style={styles.subtitle}>Servings: {details.servings}</Text>
+      <Text style={styles.subtitle}>Ready in: {details.readyInMinutes} minutes</Text> */}
       <Text style={styles.subtitle}>Cooking Time: {details.cookingMinutes} minutes</Text>
-      <Text style={styles.subtitle}>Preparation Time: {details.preparationMinutes} minutes</Text>
+      {/* <Text style={styles.subtitle}>Preparation Time: {details.preparationMinutes} minutes</Text>
       <Text style={styles.subtitle}>Health Score: {details.healthScore}</Text>
       <Text style={styles.subtitle}>Summary:</Text>
-      <Text style={styles.summary}>{details.summary}</Text>
+      <Text style={styles.summary}>{details.summary}</Text> */}
 
-      <Text style={styles.subtitle}>Ingredients:</Text>
+      {/* <Text style={styles.subtitle}>Ingredients:</Text>
       {details.extendedIngredients.map((ingredient) => (
         <View key={ingredient.id} style={styles.ingredientContainer}>
           <Text style={styles.ingredientName}>{ingredient.name}</Text>
           <Text style={styles.ingredientAmount}>{ingredient.amount} {ingredient.measures.us.unitShort}</Text>
         </View>
-      ))}
+      ))} }
 
-      {details.winePairing && (
+      {/* {details.winePairing && (
         <>
           <Text style={styles.subtitle}>Wine Pairing:</Text>
           <Text style={styles.pairingText}>{details.winePairing.pairingText}</Text>
@@ -79,7 +121,7 @@ const DetailsScreen = () => {
             </View>
           ))}
         </>
-      )}
+      )} */}
     </ScrollView>
   );
 };
@@ -164,6 +206,36 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  infoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  bookmarkTag: {
+    backgroundColor: '#FF6F61',
+    color: '#fff',
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 8,
+    fontSize: 12,
+  },
+  bookmarkButton: {
+    backgroundColor: '#264E36',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  bookmarkButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  description: {
+    fontSize: 16,
+    color: '#767676',
+    marginVertical: 16,
   },
 });
 

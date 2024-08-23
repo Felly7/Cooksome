@@ -77,9 +77,9 @@ export default function UserProfile() {
             <Text style={styles.label}>Phone:</Text>
             <TextInput
               style={styles.input}
-              value={phone}
+              value={PhoneNumber}
               editable={isEditing}
-              onChangeText={setPhone}
+              onChangeText={setPhoneNumber}
               keyboardType="phone-pad"
               placeholder="Enter your phone number"
             />

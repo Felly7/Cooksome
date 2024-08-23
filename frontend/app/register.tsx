@@ -57,7 +57,7 @@ const RegisterScreen = () => {
         keyboardType="numeric"
         autoCapitalize="none"
         autoCorrect={false}
-        value={email}
+        value={PhoneNumber}
         onChangeText={setPhoneNumber}
         />
       <TextInput

@@ -1,42 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, SafeAreaView, TextInput, FlatList, ActivityIndicator, Image, Text, TouchableOpacity, StatusBar } from 'react-native';
-import axios from 'axios';
-import { getSearchResults } from '../services/api';
-import { router } from 'expo-router';
+import { StyleSheet, View, SafeAreaView, FlatList, ActivityIndicator, Image, Text, TouchableOpacity, StatusBar } from 'react-native';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import BottomNav from '@/components/BottomNav';
+import recipeData from '../assets/recipe.json';
 
-const Search = () => {
-  const [search, setSearch] = useState('');
+const RecipeList = () => {
+  const router = useRouter();
+  const { id } = useLocalSearchParams(); // Get the 'id' parameter from the route
+  const ids = id.split(',');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      if (search.length > 2) {
-        fetchSearchResults(search);
-      } else {
-        setResults([]);
+    const fetchBreakfastResults = (id) => {
+      setLoading(true);
+      try {
+        // Filter the recipes based on the dishType and potentially the id
+        const filteredResults = recipeData.filter(
+          (recipe) =>  recipe.id === id
+        );
+        setResults(filteredResults);
+        console.log(filteredResults)
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      } finally {
+        setLoading(false);
       }
-    }, 300);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [search]);
-
-  const fetchSearchResults = async (search) => {
-    setLoading(true);
-    try {
-      const response = await getSearchResults(search)
-      setResults(response.results);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-    } finally {
-      setLoading(false);
+    };
+    if (id) {
+      fetchBreakfastResults(id); // Fetch results when 'id' is available
     }
-  };
+  }, [id]);
 
-  const handlePress =  (id) => {
-    router.push(`/details?id=${id}`);
-  }
+  const handlePress = (id) => {
+    router.push(`/details?id=${id}`); // Navigate to details screen with the selected recipe's id
+  };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.resultItem} onPress={() => handlePress(item.id)}>
@@ -47,12 +45,6 @@ const Search = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Search any recipes"
-        value={search}
-        onChangeText={(text) => setSearch(text)}
-      />
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
@@ -67,7 +59,7 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default RecipeList;
 
 const styles = StyleSheet.create({
   container: {
@@ -75,13 +67,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F6F4EF',
     padding: 16,
     marginTop: StatusBar.currentHeight,
-  },
-  searchInput: {
-    height: 40,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    marginBottom: 16,
   },
   resultItem: {
     flexDirection: 'row',

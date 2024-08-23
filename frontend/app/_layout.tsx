@@ -36,7 +36,7 @@ export default function RootLayout() {
             <Stack.Screen name="register" options={{ headerShown: false }} />
             <Stack.Screen name="details" options={{ headerShown: false }} />
             <Stack.Screen name="bookmark" options={{ headerShown: false }} />
-            <Stack.Screen name="search" options={{ headerShown: false }} />
+            <Stack.Screen name="Local_Dishes" options={{ headerShown: false }} />
             <Stack.Screen name="profile" options={{ headerShown: false }} />
             <Stack.Screen name="add" options={{ headerShown: false }} />
             <Stack.Screen name="HelpSupport" options={{ headerShown: false }} />
@@ -45,6 +45,7 @@ export default function RootLayout() {
             <Stack.Screen name="SecurityScreen" options={{ headerShown: false }} />
             <Stack.Screen name="TwoFactorAuthScreen" options={{ headerShown: false }} />
             <Stack.Screen name="ChangePasscode" options={{ headerShown: false }} />
+            <Stack.Screen name="recipeList" options={{ headerShown: false }} />
 
             <Stack.Screen name="+not-found" />
           </Stack>

@@ -1,14 +1,64 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView, Image, SafeAreaView, StatusBar, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 import { useUser } from './UserContext';
-import { getFoodData } from '../services/api';
+import { getFoodData, getSearchResults } from '../services/api';
 import { router } from 'expo-router';
 import BottomNav from '@/components/BottomNav';
 
 const HomeScreen = () => {
     const { user } = useUser();
     const [foodData, setFoodData] = useState([]);
+    const [firstSet, setFirstSet] = useState([]);
+    const [secondSet, setSecondSet] = useState([]);
+    const [thirdSet, setThirdSet] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState('');
+    const [results, setResults] = useState([]);
+
+    
+    useEffect(() => {
+        const fetchFoodData = async () => {
+            try {
+                const data1 = await getFoodData(0); 
+                const data2 = await getFoodData(10); 
+                const data3 = await getFoodData(20);
+                setFirstSet(data1.results);
+                setSecondSet(data2.results);
+                setThirdSet(data3.results);
+            } catch (error) {
+                console.error('Failed to fetch food data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchFoodData();
+    }, []);
+
+
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            if (search.length > 2) {
+                fetchSearchResults(search);
+            } else {
+                setResults([]);
+            }
+        }, 300);
+        
+        return() => clearTimeout(delayDebounceFn);
+    }, [search]);
+
+    const fetchSearchResults = async (query) => {
+        setLoading(true);
+        try {
+            const response = await getSearchResults(query);
+            setResults(response.results);
+        } catch (error) {
+            console.error('Error fetching search results:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         const fetchFoodData = async () => {
@@ -38,8 +88,12 @@ const HomeScreen = () => {
         );
     }
 
+    const handleLocalPress = () => {
+        router.push('Local_Dishes');
+    };
+
     const renderItem = ({ item }) => (
-        <TouchableOpacity onPress={() => handleFoodDetails(item.id)}>
+        <TouchableOpacity onPress={() => handleFoodDetails(item.id)} style={styles.resultItem} >
             <View style={styles.card}>
                 <Image style={styles.image} source={{ uri: item.image }} />
                 <Text style={styles.cardTitle}>{item.title}</Text>
@@ -52,6 +106,20 @@ const HomeScreen = () => {
             <ScrollView>
                 
                 <Text style={styles.title}>What would you like to cook today, <Text style={styles.name}>{user?.name}</Text>?</Text>
+                <TextInput
+                    style={styles.searchInput}
+                    placeholder="Search for recipes"
+                    value={search}
+                    onChangeText= {(text) => setSearch(text)} />
+                   {search.length > 2 && results.length > 0 ? (
+                    <FlatList
+                        data={results}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id.toString()}
+                        style={styles.searchResults}
+                    /> 
+                   ) : (
+                    <>
                 <Text style={styles.categoryTitle}>Categories</Text>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryContainer}>
                     <TouchableOpacity style={styles.categoryButton}>
@@ -64,13 +132,30 @@ const HomeScreen = () => {
                 </ScrollView>
                 <Text style={styles.subtitle}>Recommendation</Text>
                 <FlatList
-                    data={foodData}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item._id.toString()}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    style={styles.scrollContainer}
-                />
+                 data={firstSet}
+                 renderItem={renderItem}
+                 keyExtractor={(item) => item.id.toString()}
+                 horizontal
+                 showsHorizontalScrollIndicator={false}
+               />
+               <Text style={styles.subtitle}>Easy To Make</Text>
+               <FlatList
+                 data={secondSet}
+                 renderItem={renderItem}
+                 keyExtractor={(item) => item.id.toString()}
+                 horizontal
+                 showsHorizontalScrollIndicator={false}
+               />
+               <Text style={styles.subtitle}>Must Try</Text>
+               <FlatList
+                 data={thirdSet}
+                 renderItem={renderItem}
+                 keyExtractor={(item) => item.id.toString()}
+                 horizontal
+                 showsHorizontalScrollIndicator={false}
+               />
+                </>
+            )}
     
             </ScrollView>
             <BottomNav />
@@ -128,22 +213,20 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     card: {
-        backgroundColor: '#fff',
-        borderRadius: 8,
-        padding: 16,
-        marginRight: 16,
-        width: 200,
+       flex: 1,
     },
     image: {
         width: '100%',
         height: 100,
-        borderRadius: 8,
-        marginBottom: 8,
+        borderRadius: 5,
+        marginBottom: 1,
+        overflow: 'hidden',
     },
     cardTitle: {
         fontSize: 16,
         color: '#264E36',
         marginBottom: 4,
+        fontWeight: 'bold',
     },
     cardDescription: {
         fontSize: 14,
@@ -161,6 +244,31 @@ const styles = StyleSheet.create({
         marginVertical: 1,
 
     },
+    searchInput: {
+        backgroundColor: '#fff',
+        paddingHorizontal: 16,
+        marginBottom: 16,
+        borderRadius: 8,
+        height: 40,
+        fontSize: 16,
+        color: '#264E36',
+    },
+    searchResults: {
+        marginBottom: 10,
+    },
+    resultItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc', 
+    },
+    resultImage: {
+        width: 50,
+        height: 50,
+        borderRadius: 8,
+        marginRight: 16,
+      },
 });
 
 export default HomeScreen;
